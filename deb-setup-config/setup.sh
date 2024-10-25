@@ -1,14 +1,24 @@
 #!/bin/bash
 #
-# .--.
-# |__| .-------.
-# |=.| |.-----.|
-# |--| ||     ||
-# |  | |'-----'|
-# |__|~')_____('
+#          _nnnn_
+#         dGGGGMMb
+#        @p~qp~~qMb
+#        M|@||@) M|
+#        @,----.JM|
+#       JS^\__/  qKL
+#      dZP        qKRb
+#     dZP          qKKb
+#    fZP            SMMb
+#    HZM            MMMM
+#    FqM            MMMM
+#  __| ".        |\dS"qML
+#  |    `.       | `' \Zq
+# _)      \.___.,|     .'
+# \____   )MMMMMP|   .'
+#      `-'       `--' 
 #
 # Debian 12 Setup
-# By: 16BitMiker (2024-10-07)
+# By: 16BitMiker (v2024-10-24)
 # Run: curl -sSL https://wcw.sh/setup.txt | bash
 #
 # ~~~~~~~~~~~~~~~~ BEGIN
@@ -23,12 +33,6 @@ set -e
 
 echo $USER | perl -nle 'print qq~${_} ALL=(ALL) NOPASSWD:ALL~' | sudo tee -a /etc/sudoers >/dev/null
 
-# ~~~~~~~~~~~~~~~~ DEPENDANCIES
-
-sudo apt install sudo -y
-sudo apt install perl -y
-sudo apt install libperl-dev -y
-
 # ~~~~~~~~~~~~~~~~ UPDATES
 
 # Update package list
@@ -39,6 +43,12 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get upgrade -y -o Dpkg::Options::="--for
 
 # Perform distribution upgrade
 sudo DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
+
+# ~~~~~~~~~~~~~~~~ DEPENDANCIES
+
+sudo apt install sudo -y
+sudo apt install perl -y
+sudo apt install libperl-dev -y
 
 # ~~~~~~~~~~~~~~~~ LOCALE
 
@@ -74,6 +84,57 @@ locale -a
 
 echo "Configuration complete. It's recommended to reboot the system for changes to take full effect."
 
+# ~~~~~~~~~~~~~~~~ INSTALLER
+
+# Temporarily disable exit on error
+set +e
+
+perl -Mutf8 -M'open qw(:std :utf8 :encoding(UTF-8))' -MTerm::ANSIColor=':constants' -nE'
+
+$|++;
+
+sub ꕤ
+{
+    my $__ = {}; # color, message
+    $$__{q║ʕ•ᴥ•ʔ║} = { COLOR => shift =~ s☰^$☰WHITE☰r, MSG => @_ // q║║ };
+    my $output = sprintf q║print %s q`%s`, RESET;║, $$__{q║ʕ•ᴥ•ʔ║}{COLOR}, qq║@_║;
+    eval $output;
+}
+
+sub ꖜ
+{
+	no warnings;
+	my $__ = shift; # cmd
+	print q║> ║;
+	$__ =~ s☰.☰select(undef, undef, undef, rand(0.03)); ꕤ q║YELLOW║ => $&☰sger;
+	say q║║;
+	system $__;
+	if ( $? != 0 )
+	{
+	    print q║> ║;
+	    print BOLD UNDERLINE RED;
+	    ꕤ qq║RED║ => qq║Fail: Command "$_" exited with status @{[$? >> 8]}\n║;
+	    say RESET qq║║;
+	    # sleep 1;
+	    exit 69;
+	}
+	use warnings;
+}
+
+chomp;
+
+s☰^(?!\#)(.*)$☰ꖜ($1)☰merg unless m~^$~;
+
+END
+{
+	ꕤ q║GREEN BOLD║ => qq║All Done!\n║;
+	ꕤ q║WHITE║ => qq║For mOAR visit: ║;
+	ꕤ q║GREEN BOLD║ => qq║https://wildcard-wizards.sh\n║;
+	ꕤ q║WHITE║ => qq║Run this to finish up:\n║;
+	ꕤ q║WHITE║ => qq║source $HOME/.bashrc\n║;
+}
+
+' <<'END_OF_INPUT'
 # ~~~~~~~~~~~~~~~~ DIRS
 
 mkdir -p $HOME/temp
@@ -206,44 +267,6 @@ echo "set statusline=%f%m%r%h%w[%{&ff},%Y][%l/%L,%c][%p%%]" | tee -a $HOME/.vimr
 echo "filetype plugin on" | tee -a $HOME/.vimrc >/dev/null
 echo "filetype indent on" | tee -a $HOME/.vimrc >/dev/null
 
-# ~~~~~~~~~~~~~~~~ INSTALLER
-
-# Temporarily disable exit on error
-set +e
-
-perl -Mutf8 -M'open qw(:std :utf8 :encoding(UTF-8))' -MTerm::ANSIColor=':constants' -E '
-
-$|++;
-
-sub ꕤ
-{
-    my $__ = {}; # color, message
-    $$__{q║ʕ•ᴥ•ʔ║} = { COLOR => shift =~ s☰^$☰WHITE☰r, MSG => @_ // q║║ };
-    my $output = sprintf q║print %s q`%s`, RESET;║, $$__{q║ʕ•ᴥ•ʔ║}{COLOR}, qq║@_║;
-    eval $output;
-}
-
-sub ꖜ
-{
-	no warnings;
-	my $__ = shift; # cmd
-	print q║> ║;
-	$__ =~ s☰.☰select(undef, undef, undef, rand(0.09)); ꕤ q║YELLOW║ => $&☰sger;
-	say q║║;
-	system $__;
-	if ( $? != 0 )
-	{
-	    print q║> ║;
-	    print BOLD UNDERLINE RED;
-	    ꕤ qq║RED║ => qq║Fail: Command "$_" exited with status @{[$? >> 8]}\n║;
-	    say RESET qq║║;
-	    # sleep 1;
-	    exit 69;
-	}
-	use warnings;
-}
-
-my $ಠ_ಠ =<<"꧁꧂" =~ s☰^(?!\#|\n)(.*)$☰ꖜ($1)☰merg;
 # Debian Basics Installer
 # Install essential packages and tools
 
@@ -397,15 +420,7 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get autoremove -y
 
 # Clean up package cache
 sudo DEBIAN_FRONTEND=noninteractive apt-get clean
-꧁꧂
-
-ꕤ q║GREEN BOLD║ => qq║All Done!\n║;
-ꕤ q║WHITE║ => qq║For mOAR visit: ║;
-ꕤ q║GREEN BOLD║ => qq║https://wildcard-wizards.sh\n║;
-ꕤ q║WHITE║ => qq║Run this to finish up:\n║;
-ꕤ q║WHITE║ => qq║source $HOME/.bashrc\n║;
-'
-# ~~~~~~~~~~~~~~~~ END
+END_OF_INPUT
 
 # Disable debugging output
 set +x
