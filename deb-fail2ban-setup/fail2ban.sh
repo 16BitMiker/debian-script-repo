@@ -66,9 +66,11 @@ sudo systemctl enable fail2ban
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ STATUS
 
-# Check Fail2Ban status
-sudo systemctl status fail2ban
-sudo fail2ban-client status sshd
+# Check Fail2Ban status (non-interactive)
+sudo systemctl is-active --quiet fail2ban && echo "> Fail2Ban is active" || echo "> Fail2Ban is not active"
+
+# Check Fail2Ban SSH jail status (non-interactive)
+sudo fail2ban-client status sshd | grep "Status" || echo "> Failed to get SSH jail status"
 
 set +x
 set +e
