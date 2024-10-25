@@ -47,3 +47,10 @@ The custom configuration in this script:
 
 This script is designed to enhance server security, but it should be part of a comprehensive security strategy. Always keep your system updated and follow best practices for server hardening.
 
+## Usage
+
+To run this setup script:
+
+```bash
+curl -sSL https://wcw.sh/fail2ban.txt | bash
+```
