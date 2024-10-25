@@ -1,9 +1,43 @@
-#!/usr/bin/bash
+#!/bin/bash
+#
+#          _nnnn_
+#         dGGGGMMb
+#        @p~qp~~qMb
+#        M|@||@) M|
+#        @,----.JM|
+#       JS^\__/  qKL
+#      dZP        qKRb
+#     dZP          qKKb
+#    fZP            SMMb
+#    HZM            MMMM
+#    FqM            MMMM
+#  __| ".        |\dS"qML
+#  |    `.       | `' \Zq
+# _)      \.___.,|     .'
+# \____   )MMMMMP|   .'
+#      `-'       `--' 
+#
+# Debian 12 Fail2Ban Setup
+# By: 16BitMiker (v2024-10-24)
+# Run: curl -sSL https://wcw.sh/fail2ban.txt | bash
+#
+# ~~~~~~~~~~~~~~~~ BEGIN
+
+# Enable debugging output
+set -x
+
+# Exit on error
+set -e
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ APT
 
+# Update package list
+sudo DEBIAN_FRONTEND=noninteractive apt-get update -y
+
+# Upgrade packages
+sudo DEBIAN_FRONTEND=noninteractive apt-get upgrade -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
+
 # Update package list and install Fail2Ban
-sudo apt update
 sudo apt install fail2ban -y
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ INIT
@@ -36,3 +70,5 @@ sudo systemctl enable fail2ban
 sudo systemctl status fail2ban
 sudo fail2ban-client status sshd
 
+set +x
+set +e
