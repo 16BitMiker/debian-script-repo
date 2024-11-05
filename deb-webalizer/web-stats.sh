@@ -1,9 +1,39 @@
 #!/bin/bash
-
+#
+#          _nnnn_
+#         dGGGGMMb
+#        @p~qp~~qMb
+#        M|@||@) M|
+#        @,----.JM|
+#       JS^\__/  qKL
+#      dZP        qKRb
+#     dZP          qKKb
+#    fZP            SMMb
+#    HZM            MMMM
+#    FqM            MMMM
+#  __| ".        |\dS"qML
+#  |    `.       | `' \Zq
+# _)      \.___.,|     .'
+# \____   )MMMMMP|   .'
+#      `-'       `--'
+#
+# Webalizer
+# By: 16BitMiker (v2024-11-04)
+#
+# ~~~~~~~~~~~~~~~~ INSTALL
+#
 # To install webalizer:
 # sudo apt update
 # sudo apt install apache2-utils -y
 # sudo apt install webalizer
+#
+# ~~~~~~~~~~~~~~~~ BEGIN
+
+# Enable debugging output
+set -x
+
+# Exit on error
+set -e
 
 perl -MTerm::ANSIColor=:constants -nE '
 
