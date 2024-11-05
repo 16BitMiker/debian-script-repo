@@ -1,0 +1,41 @@
+LogFile /var/log/path/to/access.log
+
+OutputDir      /var/www/path/to/output/
+
+HostName	150.dentistry.utoronto.ca
+
+PageType	htm*
+PageType	cgi
+PageType	php3
+PageType	php
+
+UseHTTPS       yes
+
+ideURL		*.gif
+HideURL		*.GIF
+HideURL		*.jpg
+HideURL		*.JPG
+HideURL		*.png
+HideURL		*.PNG
+HideURL		*.ra
+
+gnoreSite	localhost
+IgnoreReferrer	localhost
+
+earchEngine	.google.	q=
+SearchEngine	yahoo.com	p=
+SearchEngine	altavista.com	q=
+SearchEngine	aolsearch.	query=
+SearchEngine	ask.co		q=
+SearchEngine	eureka.com	q=
+SearchEngine	lycos.com	query=
+SearchEngine	hotbot.com	MT=
+SearchEngine	msn.com		q=
+SearchEngine	infoseek.com	qt=
+SearchEngine	excite		search=
+SearchEngine	netscape.com	query=
+SearchEngine	mamma.com	query=
+SearchEngine	alltheweb.com	q=
+SearchEngine	northernlight.com  qr=
+SearchEngine	sensis.com.au	find=
+
