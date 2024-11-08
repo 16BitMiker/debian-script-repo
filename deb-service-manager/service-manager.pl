@@ -1,5 +1,25 @@
 #!/usr/bin/env perl
-
+#
+#          _nnnn_
+#         dGGGGMMb
+#        @p~qp~~qMb
+#        M|@||@) M|
+#        @,----.JM|
+#       JS^\__/  qKL
+#      dZP        qKRb
+#     dZP          qKKb
+#    fZP            SMMb
+#    HZM            MMMM
+#    FqM            MMMM
+#  __| ".        |\dS"qML
+#  |    `.       | `' \Zq
+# _)      \.___.,|     .'
+# \____   )MMMMMP|   .'
+#      `-'       `--' 
+#
+# Debian Service Manager
+# By: 16BitMiker (v2024-11-08)
+#
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Pragmas
 
 use strict;
